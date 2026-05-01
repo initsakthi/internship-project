@@ -48,19 +48,6 @@ It combines:
 * 📊 Structured JSON output
 
 ---
-
-## 📸 Screenshots
-
-### Upload Interface
-
-![Upload Page](docs/screenshots/upload.png)
-
-### Extraction Results
-
-![Results](docs/screenshots/result.png)
-
----
-
 ## ⚙️ Setup Instructions
 
 ### 1️⃣ Clone the Repository

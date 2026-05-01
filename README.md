@@ -93,7 +93,7 @@ uvicorn main:app --reload
 ## 🌐 Frontend Setup
 
 ```bash
-cd frontend
+cd structure_project
 
 # Install dependencies
 npm install

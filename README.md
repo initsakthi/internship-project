@@ -141,7 +141,7 @@ Make sure these are running:
 ```bash
 PII-Detection-System/
 │── backend/
-│── frontend/
+│── structure_project/
 │── docs/
 │   └── screenshots/
 │── README.md

@@ -53,11 +53,11 @@ It combines:
 
 ### Upload Interface
 
-![Upload Page](docs/screenshot/upload.png)
+![Upload Page](docs/screenshots/upload.png)
 
 ### Extraction Results
 
-![Results](docs/screenshot/result.png)
+![Results](docs/screenshots/result.png)
 
 ---
 
@@ -193,7 +193,7 @@ PII-Detection-System/
 ## 👨‍💻 Author
 
 **Sakthivel Chandramohan**
-MCA Student | Full Stack Developer | AI Enthusiast
+Full Stack Developer | AI Enthusiast
 
 ---
 

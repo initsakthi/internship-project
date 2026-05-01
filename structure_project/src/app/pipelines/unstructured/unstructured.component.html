@@ -1,0 +1,86 @@
+<div class="pipeline-wrapper">
+
+  <div class="header-row">
+    <h1>Unstructured <span>Pipeline</span></h1>
+    <button class="dash-btn"
+            (click)="router.navigate(['/dashboard'])">
+      DASHBOARD
+    </button>
+  </div>
+
+  <!-- TAG SELECTION -->
+  <div class="glass-section">
+    <h3>1. Select Required Tags</h3>
+
+    <div class="tag-pool">
+      <button *ngFor="let tag of availableTags"
+              (click)="addTag(tag)"
+              class="tag-btn">
+        {{ tag }}
+      </button>
+    </div>
+
+    <div class="selected-row">
+      <span *ngFor="let tag of selectedTags"
+            class="tag-chip active">
+        {{ tag }}
+        <b (click)="removeTag(tag)">×</b>
+      </span>
+    </div>
+  </div>
+
+  <!-- FILE UPLOAD -->
+  <div class="glass-section">
+    <h3>2. Document Upload</h3>
+
+    <div class="upload-box" (click)="fileInput.click()">
+      <input type="file"
+             #fileInput
+             (change)="onFileSelected($event)"
+             hidden>
+
+      <div class="upload-content">
+        <p *ngIf="!selectedFile">
+          Click to import document for processing
+        </p>
+
+        <p *ngIf="selectedFile" class="file-name">
+          {{ selectedFile.name }}
+        </p>
+      </div>
+    </div>
+
+    <button class="action-btn"
+            [disabled]="!selectedFile || loading"
+            (click)="runPipeline()">
+
+      {{ loading ? 'EXTRACTING...' : 'PROCESS DOCUMENT' }}
+    </button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="glass-section" *ngIf="extractedRecords.length > 0">
+
+    <h3>Extraction Results</h3>
+
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>TAG</th>
+          <th>VALUE</th>
+          <th>PAGE</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let record of extractedRecords">
+          <td class="bold-tag">{{ record.tag }}</td>
+          <td class="result-value">{{ record.value }}</td>
+          <td>{{ record.page_number }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

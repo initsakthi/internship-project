@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual Environment
+venv/
+.env/
+.env.*
+
+# Node (Angular)
+node_modules/
+dist/
+.angular/
+.cache/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Uploads (VERY IMPORTANT for your project)
+uploads/
+
+# Models / LLM
+*.bin
+*.pt
+*.gguf
+
+# Mongo / Elastic dumps
+dump/
+data/
+
+# Environment variables
+.env
+
+# Temporary
+tmp/
+temp/

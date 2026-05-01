@@ -1,0 +1,73 @@
+<div class="dashboard-wrapper">
+  <main class="content">
+    <header class="glass-header">
+      <div class="header-left">
+        <h1 class="welcome-greet">Semi-Structured <span>Pipeline</span></h1>
+      </div>
+      <button class="nav-dash-btn" (click)="router.navigate(['/dashboard'])">DASHBOARD</button>
+    </header>
+
+    <div class="central-container">
+      <section class="glass-card animate-up">
+        <h3 class="section-title">1. Select NoSQL Tags</h3>
+        <div class="drag-wrapper">
+          <div class="tag-pool" cdkDropList #poolList="cdkDropList" 
+               [cdkDropListData]="availableTags" 
+               [cdkDropListConnectedTo]="[selectedList]">
+            <span *ngFor="let tag of availableTags" cdkDrag class="capsule pool-tag">{{ tag }}</span>
+          </div>
+          <div class="drop-zone" cdkDropList #selectedList="cdkDropList" 
+               [cdkDropListData]="config.tags" 
+               (cdkDropListDropped)="drop($event)">
+            <p *ngIf="config.tags.length === 0" class="placeholder-text">Drag MongoDB fields here...</p>
+            <span *ngFor="let tag of config.tags" class="capsule selected-tag">
+              {{ tag }} <button class="remove-btn" (click)="removeTag(tag)">×</button>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="glass-card animate-up" style="animation-delay: 0.1s;">
+        <h3 class="section-title">2. MongoDB Connection</h3>
+        <div class="history-chips" *ngIf="connectionHistory.length > 0">
+          <span *ngFor="let item of connectionHistory; let i = index" (click)="selectHistory(item)" class="history-chip">
+            {{ item.port }} → {{ item.db }}
+            <span class="clear-history" (click)="removeHistory(i, $event)">×</span>
+          </span>
+        </div>
+        <div class="mini-form">
+          <div class="input-row">
+            <input type="text" [(ngModel)]="config.db_host" placeholder="Host">
+            <input type="number" [(ngModel)]="config.db_port" placeholder="Port">
+          </div>
+          <input type="text" [(ngModel)]="config.db_name" placeholder="Database Name">
+          <button class="connect-btn" [ngClass]="{'btn-success': connectionStatus === 'success', 'btn-failed': connectionStatus === 'failed'}" (click)="testConnection()">
+            <span *ngIf="connectionStatus === 'idle'">CONNECT MONGODB</span>
+            <span *ngIf="connectionStatus === 'success'">✓ MONGODB SECURE</span>
+            <span *ngIf="connectionStatus === 'failed'">✗ CONNECTION FAILED</span>
+          </button>
+        </div>
+      </section>
+
+      <button class="extract-trigger" *ngIf="connectionStatus === 'success'" (click)="performExtraction()">RUN NOSQL EXTRACTION</button>
+
+      <section class="glass-card result-terminal animate-up" *ngIf="results.length > 0">
+         <h3 class="section-title">NoSQL Extraction Results</h3>
+         <div class="table-container">
+           <table class="styled-table">
+             <thead>
+               <tr><th>TAG</th><th>VALUE</th><th>COLLECTION</th></tr>
+             </thead>
+             <tbody>
+               <tr *ngFor="let row of results">
+                 <td class="tag-cell">{{ row.tag }}</td>
+                 <td>{{ row.value }}</td>
+                 <td class="src-cell">{{ row.sourceTable }}</td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+      </section>
+    </div>
+  </main>
+</div>

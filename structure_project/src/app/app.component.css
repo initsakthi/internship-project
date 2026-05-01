@@ -1,0 +1,18 @@
+/* Existing styles... */
+.section { margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 20px; }
+.connection-box { background: #111; padding: 20px; border: 1px solid #333; }
+
+.history-select select { width: 100%; padding: 10px; background: #000; color: #fff; border: 1px solid #444; margin-bottom: 15px; }
+.input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+.input-group input { flex: 1; padding: 10px; background: #000; color: #fff; border: 1px solid #444; }
+
+.verify-btn { background: #444; color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%; }
+.verify-btn:hover { background: #555; }
+
+.status-msg { margin-top: 15px; font-size: 0.85rem; font-weight: bold; }
+.status-msg.connected { color: #00ff00; }
+.status-msg.error { color: #ff0000; }
+.status-msg.connecting { color: #ffff00; }
+
+.main-action { background: #00ff00; color: #000; }
+.main-action:hover { background: #00cc00; }

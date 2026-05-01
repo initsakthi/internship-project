@@ -1,0 +1,38 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="company-logo">
+      
+    </div>
+
+    <h2>{{ isRegisterMode ? 'New Account' : (role | titlecase) + ' Login' }}</h2>
+
+    <div class="form-container">
+      <div class="input-group">
+        <select [(ngModel)]="role">
+          <option value="user">User</option>
+          <option value="developer">Developer</option>
+        </select>
+      </div>
+      
+
+
+      <div class="input-group">
+        <input type="text" [(ngModel)]="username" placeholder="Username">
+      </div>
+
+      <div class="input-group">
+        <input type="password" [(ngModel)]="password" placeholder="Password">
+      </div>
+
+      <button *ngIf="!isRegisterMode" class="login-btn" (click)="onLogin()">Log In</button>
+      <button *ngIf="isRegisterMode" class="login-btn" (click)="onRegister()">Register Now</button>
+
+      <div class="divider">OR</div>
+
+      <button class="register-btn" (click)="toggleMode()">
+        {{ isRegisterMode ? 'Back to Login' : 'Create New Account' }}
+      </button>
+    </div>
+  </div>
+</div>

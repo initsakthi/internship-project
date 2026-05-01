@@ -1,0 +1,100 @@
+<div class="dashboard-wrapper">
+  <main class="content">
+    
+    <header class="glass-header">
+      <div class="header-left">
+        <div class="network-badge">
+          <span class="status-dot" [style.background-color]="networkStatusColor"></span>
+          <i class="bi bi-reception-4 signal-icon"></i>
+          <span>{{ networkSpeed }}</span>
+        </div>
+        <h1 class="welcome-greet">Hi, <span>{{ username }}!</span></h1>
+      </div>
+
+      <div class="header-right">
+        <div class="profile-group">
+          <div class="avatar-circle" (click)="isProfileMenuOpen = !isProfileMenuOpen">
+            {{ (username && username.length > 0) ? username[0].toUpperCase() : 'U' }}
+          </div>
+          
+          <div class="small-dropdown glass-card animate-down" *ngIf="isProfileMenuOpen">
+            <div class="drop-info">
+              <span class="mini-label">Logged in as</span>
+              <strong class="mini-name">{{ username }}</strong>
+            </div>
+            <button class="mini-logout" (click)="logout()">
+              <i class="bi bi-door-open-fill"></i> Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="central-container">
+      <div class="metrics-row">
+        <section class="glass-card usage-section animate-up">
+          <h3 class="section-title">Login Limit (Max 50)</h3>
+          <div class="multi-chart-container">
+            @if (isBrowser) {
+              <canvas baseChart 
+                      [data]="loginRingData" 
+                      [type]="'doughnut'" 
+                      [options]="multiRingOptions">
+              </canvas>
+            }
+          </div>
+          <div class="legend-labels">
+            <div class="label-item">
+              <span class="dot" [style.background-color]="ringColor"></span> 
+              {{ loginCount }} / 50 Logins
+            </div>
+          </div>
+        </section>
+
+        <section class="glass-card history-section animate-up" style="animation-delay: 0.1s;">
+          <h3 class="section-title">Recent Activity</h3>
+          <div class="scroll-container">
+            <div class="history-item" *ngFor="let item of extractionHistory">
+              <span class="h-type">{{ item.type }}</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="pipeline-grid animate-up" style="animation-delay: 0.2s;">
+        <div class="square-card" (click)="router.navigate(['/pipeline/structured'])">
+          <div class="custom-symbol">
+            <svg viewBox="0 0 100 40" class="pipeline-svg">
+              <circle cx="20" cy="20" r="4" fill="currentColor"/>
+              <line x1="24" y1="20" x2="76" y2="20" stroke="currentColor" stroke-width="3"/>
+              <circle cx="80" cy="20" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Structured</h4>
+        </div>
+
+        <div class="square-card" (click)="router.navigate(['/pipeline/semi-structured'])">
+          <div class="custom-symbol">
+            <svg viewBox="0 0 100 60" class="pipeline-svg">
+              <circle cx="20" cy="45" r="4" fill="currentColor"/>
+              <path d="M24 45 H50 V15 H76" fill="none" stroke="currentColor" stroke-width="3"/>
+              <circle cx="80" cy="15" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Semi-Structured</h4>
+        </div>
+
+        <div class="square-card" (click)="router.navigate(['/pipeline/unstructured'])">
+          <div class="custom-symbol">
+            <svg viewBox="0 0 100 60" class="pipeline-svg">
+              <circle cx="20" cy="45" r="4" fill="currentColor"/>
+              <path d="M24 45 H40 V25 H60 V45 H80 V15 H90" fill="none" stroke="currentColor" stroke-width="3"/>
+              <circle cx="94" cy="15" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Unstructured</h4>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

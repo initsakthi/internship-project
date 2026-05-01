@@ -1,0 +1,70 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h1>Unified Data Extraction Platform</h1>
+    <p class="subtitle">Intelligent extraction for all your data needs</p>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="form-section">
+      <form [formGroup]="extractionForm" (ngSubmit)="onSubmit()">
+
+        <!-- Section 1: Tag Input -->
+        <div class="form-group">
+          <label for="tags">Tags to Extract</label>
+          <input type="text" id="tags" formControlName="tags" class="form-control"
+            placeholder="e.g. name, email, date of birth, phone">
+          <small class="hint">Enter tags as comma-separated values</small>
+        </div>
+
+        <!-- Section 2: Data Type Selection -->
+        <div class="form-group">
+          <label>Select Data Type</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" formControlName="dataType" value="Structured">
+              <span class="radio-custom"></span>
+              Structured
+            </label>
+            <label class="radio-label">
+              <input type="radio" formControlName="dataType" value="Semi-Structured">
+              <span class="radio-custom"></span>
+              Semi-Structured
+            </label>
+            <label class="radio-label">
+              <input type="radio" formControlName="dataType" value="Unstructured">
+              <span class="radio-custom"></span>
+              Unstructured
+            </label>
+          </div>
+        </div>
+
+        <!-- Section 3: Conditional Message -->
+        <div class="info-box" *ngIf="dataTypeMessage">
+          <i class="info-icon">ℹ️</i>
+          <p>{{ dataTypeMessage }}</p>
+        </div>
+
+        <!-- Section 4: Action Button -->
+        <div class="action-row">
+          <button type="submit" class="btn-primary" [disabled]="!this.selectedDataType">
+            Start Extraction
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Section 5: Output Preview -->
+    <div class="result-section">
+      <h2>Extraction Result (Preview)</h2>
+      <div class="json-viewer" *ngIf="mockResponse; else noResult">
+        <pre>{{ mockResponse | json }}</pre>
+      </div>
+      <ng-template #noResult>
+        <div class="placeholder-result">
+          <p>Result will appear here after extraction.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
